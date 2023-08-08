@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkbox con Opciones y Sub-Opciones</title>
+</head>
+<body>
+    <form id="miFormulario">
+        <label for="checkbox">Marcar para mostrar opciones:</label>
+        <input type="checkbox" id="checkbox">
+        
+        <div id="opciones" style="display: none;">
+            <div class="opcion">
+                <input type="checkbox" class="opcion-checkbox">
+                <label for="opcion1">Opción 1:</label>
+                <input type="text" class="opcion-input" name="opcion1">
+            </div>
+            
+            <div class="opcion">
+                <input type="checkbox" class="opcion-checkbox">
+                <label for="opcion2">Opción 2:</label>
+                <input type="text" class="opcion-input" name="opcion2">
+            </div>
+        </div>
+        
+        <input type="submit" value="Enviar">
+    </form>
+    
+    <script>
+        const checkbox = document.getElementById('checkbox');
+        const opciones = document.getElementById('opciones');
+        const opcionCheckboxes = document.querySelectorAll('.opcion-checkbox');
+        const opcionInputs = document.querySelectorAll('.opcion-input');
+        
+        checkbox.addEventListener('change', function() {
+            opciones.style.display = this.checked ? 'block' : 'none';
+        });
+        
+        opcionCheckboxes.forEach(function(opcionCheckbox, index) {
+            opcionCheckbox.addEventListener('change', function() {
+                opcionInputs[index].disabled = !this.checked;
+            });
+        });
+    </script>
+</body>
+</html>
