@@ -1,17 +1,27 @@
 from django.db import models
 
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=100)
 
-class Frenos(models.Model):
-
-    nombre = models.CharField(max_length=100, null=True, blank=True)
-    cantidad = models.CharField(max_length=100, null=True, blank=True)
-    pedidos = models.CharField(max_length=100, null=True, blank=True)
-    ok = models.BooleanField(null=True, blank=True)
-
-    @staticmethod
-    def get_default_nombres():
-        return ['Valor 1', 'Valor 2', 'Valor 3', 'Valor 4', 'Valor 5']
+    def __str__(self) -> str:
+        return f"{self.nombre}"
 
 
-class Servicios(models.Model):
-    frenos = models.ForeignKey(Frenos, on_delete=models.CASCADE)
+class Servicio(models.Model):
+    nombre = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    pedidos = models.BooleanField(default=False)
+    cantidad = models.IntegerField(default=0)
+    ok = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f"{self.nombre} {self.categoria} {self.pedidos} {self.cantidad} {self.ok}"
+
+    
+
+class Mantenimiento(models.Model):
+    servicios = models.ManyToManyField(Servicio)
+
+    def __str__(self) -> str:
+        return f"{self.servicios}"
+

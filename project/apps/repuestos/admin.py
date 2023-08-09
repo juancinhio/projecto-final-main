@@ -2,5 +2,6 @@ from django.contrib import admin
 from . import models
 # Register your models here.
 
-admin.site.register(models.Frenos)
-admin.site.register(models.Servicios)
+admin.site.register(models.Categoria)
+admin.site.register(models.Servicio)
+admin.site.register(models.Mantenimiento)

@@ -45,23 +45,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for nombre in default_nombres %}
-                                    <tr class="opcion">
-                                        <td>
-                                            <input type="text" class="opcion-input" name="pedido1" value="{{ form.pedido.value }}">
-                                        </td>
-                                        <td>
-                                            <label for="opcion1">{{ nombre }}:</label>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="opcion-input" name="cantidad1" value="{{ form.cantidad.value }}">
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="opcion-checkbox" name="ok1" {% if form.ok.value %}checked{% endif %}>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
+                                 
+                                        {% for servicio in servicios_frenos %}
+                                        <tr class="opcion">
+                                            <td>
+                                                <input type="checkbox" class="opcion-input" name="pedido_{{ servicio.id }}" value="{{ servicio.pedidos }}">
+                                            </td>
+                                            <td>
+                                                <label for="nombre">{{ servicio.nombre }}:</label>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="opcion-input" name="cantidad_{{ servicio.id }}" value="{{ servicio.cantidad }}">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="opcion-checkbox" name="ok_{{ servicio.id }}" {% if servicio.ok %}checked{% endif %}>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                  
+                                    
+                                </tbody>                                
                             </table>
                         </div>
                     </div>

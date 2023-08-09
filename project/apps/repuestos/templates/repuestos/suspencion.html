@@ -26,7 +26,7 @@
 <body>
     <div class="card" style="width: 67rem;">
         <div class="card-body" id="cardBody">
-            <h5 class="card-title">Afinacion</h5>
+            <h5 class="card-title">Suspencion</h5>
             <label for="checkbox">Marcar para mostrar opciones:</label>
             <input type="checkbox" id="checkbox">
             
@@ -45,22 +45,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for servicio in servicios_afinacion %}
-                                    <tr class="opcion">
-                                        <td>
-                                            <input type="checkbox" class="opcion-input" name="pedido_{{ servicio.id }}" value="{{ servicio.pedidos }}">
-                                        </td>
-                                        <td>
-                                            <label for="nombre">{{ servicio.nombre }}:</label>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="opcion-input" name="cantidad_{{ servicio.id }}" value="{{ servicio.cantidad }}">
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="opcion-checkbox" name="ok_{{ servicio.id }}" {% if servicio.ok %}checked{% endif %}>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
+                                 
+                                        {% for servicio in servicios_suspencion %}
+                                        <tr class="opcion">
+                                            <td>
+                                                <input type="checkbox" class="opcion-input" name="pedido_{{ servicio.id }}" value="{{ servicio.pedidos }}">
+                                            </td>
+                                            <td>
+                                                <label for="nombre">{{ servicio.nombre }}:</label>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="opcion-input" name="cantidad_{{ servicio.id }}" value="{{ servicio.cantidad }}">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="opcion-checkbox" name="ok_{{ servicio.id }}" {% if servicio.ok %}checked{% endif %}>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                  
+                                    
                                 </tbody>                                
                             </table>
                         </div>
