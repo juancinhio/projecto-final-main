@@ -1,29 +1,47 @@
 from django import forms
 from .models import Servicio
 
-class AfinacionForm(forms.Form):
-    servicios_afinacion = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=False) 
+class BaseMantenimientoForm(forms.Form):
+    servicios = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, categoria_nombre, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        servicios_afinacion = Servicio.objects.filter(categoria__nombre='Afinación')
-        servicios_choices = [(servicio.id, servicio.nombre) for servicio in servicios_afinacion]
-        self.fields['servicios_afinacion'].choices = servicios_choices
+        servicios = Servicio.objects.filter(categoria__nombre=categoria_nombre)
+        servicios_choices = [(servicio.id, servicio.nombre) for servicio in servicios]
+        self.fields['servicios'].choices = servicios_choices
 
-class FrenosForm(forms.Form):
-    servicios_frenos = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=False)
-
+class AfinacionForm(BaseMantenimientoForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        servicios_frenos = Servicio.objects.filter(categoria__nombre='Frenos')
-        servicios_choices = [(servicio.id, servicio.nombre) for servicio in servicios_frenos]
-        self.fields['servicios_frenos'].choices = servicios_choices
+        super().__init__(categoria_nombre='Afinacion', *args, **kwargs)
 
-class SuspencionForm(forms.Form):
-    servicios_frenos = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, required=False)
-
+class FrenosForm(BaseMantenimientoForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        servicios_suspencion = Servicio.objects.filter(categoria__nombre='Suspencion')
-        servicios_choices = [(servicio.id, servicio.nombre) for servicio in servicios_suspencion]
-        self.fields['servicios_suspencion'].choices = servicios_choices
+        super().__init__(categoria_nombre='Frenos', *args, **kwargs)
+
+class SuspensionForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Suspensión', *args, **kwargs)
+
+class ServiceForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Service', *args, **kwargs)
+
+class EmbragueForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Embrague', *args, **kwargs)
+
+class DistribucionForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Distribución', *args, **kwargs)
+
+class CircuitoRefrigeranteForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Circuito Refrigerante', *args, **kwargs)
+
+class ElectricidadForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Electricidad', *args, **kwargs)
+
+class OtrosForm(BaseMantenimientoForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(categoria_nombre='Otros', *args, **kwargs)
